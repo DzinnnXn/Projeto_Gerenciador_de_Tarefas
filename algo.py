@@ -21,36 +21,35 @@ def main():
 
         escolha = input("Escolha uma opção: ")
 
-        if escolha == "1":
-            cls()
-            titulo = input("Digite o título da tarefa: ")
-            descricao = input("Digite a descrição da tarefa: ")
-            data_vencimento = input("Digite a data de vencimento (dd/mm/aaaa): ")
-            prioridade = input("Digite a prioridade (Alta/Média/Baixa): ")
-            tarefa = Tarefa(titulo, descricao, data_vencimento, prioridade)
-            gerenciador.adicionar_tarefa(tarefa)
-            print("Tarefa adicionada com sucesso!")
-            pausar()
-
-        elif escolha == "2":
-            cls()
-            print("\n----- Lista de Tarefas -----")
-            gerenciador.listar_tarefas()
-            pausar()
-
-        elif escolha == "3":
-            cls()
-            gerenciador.listar_tarefas()
-            indice = int(input("Digite o número da tarefa a marcar como concluída: "))
-            gerenciador.marcar_como_concluida(indice)
-            print("Tarefa marcada como concluída!")
-            pausar()
-
-        elif escolha == "4":
-            cls()
-            print("Saindo...")
-            pausar()
-            break
-
-        else:
-            print("Opção inválida. Tente novamente.")
+        match escolha:
+            case 1:
+                cls()
+                titulo = input("Digite o título da tarefa: ")
+                descricao = input("Digite a descrição da tarefa: ")
+                prioridade = input("Digite a prioridade (Alta/Média/Baixa): ")
+                tarefa = Tarefa(titulo, descricao, prioridade)
+                gerenciador.adicionar_tarefa(tarefa)
+                print("Tarefa adicionada com sucesso!")
+                pausar()
+                
+            case 2:
+                cls()
+                print("\n----- Lista de Tarefas -----")
+                gerenciador.listar_tarefas()
+                pausar()
+                
+            case 3:
+                cls()
+                gerenciador.listar_tarefas()
+                indice = int(input("Digite o número da tarefa a marcar como concluída: "))
+                gerenciador.marcar_como_concluida(indice)
+                pausar()
+                
+            case 4:
+                cls()
+                print("Saindo do Gerenciador de Tarefas. Até logo!")
+                pausar()
+                break
+            
+            case _:
+                print("Opção inválida. Tente novamente.")
