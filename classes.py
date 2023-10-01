@@ -5,25 +5,33 @@ class Tarefa:
         self.prioridade = prioridade
         self.concluida = False
 
-class GerenciadorTarefas:
-    def __init__(self):
+class Projeto:
+    def __init__(self, nome):
+        self.nome = nome
         self.tarefas = []
 
     def adicionar_tarefa(self, tarefa):
         self.tarefas.append(tarefa)
+        tarefa.projeto_associado = self
 
-    def listar_tarefas(self):
-        for i, tarefa in enumerate(self.tarefas, start=1):
+class GerenciadorTarefas:
+    def __init__(self):
+        self.projetos = []
+
+    def criar_projeto(self, nome):
+        projeto = Projeto(nome)
+        self.projetos.append(projeto)
+        return projeto
+
+    def listar_projetos(self):
+        for i, projeto in enumerate(self.projetos, start=1):
+            print(f"{i}. {projeto.nome}")
+
+    def listar_tarefas_por_projeto(self, projeto):
+        for i, tarefa in enumerate(projeto.tarefas, start=1):
             status = "Concluída" if tarefa.concluida else "Pendente"
             print(f"{i}. {tarefa.titulo} ({tarefa.prioridade}) - {status}")
 
-    def marcar_como_concluida(self, indice):
-        match indice:
-            case 0:
-                print("Índice inválido. Tente novamente.")
-            case _ if 0 < indice <= len(self.tarefas):
-                tarefa = self.tarefas[indice - 1]
-                tarefa.concluida = True
-                self.tarefas.pop(indice - 1)  # Remove a tarefa da lista
-            case _:
-                print("Índice inválido. Tente novamente.")
+    def marcar_como_concluida(self, projeto, indice):
+        if 0 < indice <= len(projeto.tarefas):
+            projeto.tarefas[indice - 1].concluida = True
