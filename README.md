@@ -1,6 +1,6 @@
 # Gerenciador de Tarefas em Python
 
-Este é um simples gerenciador de tarefas em Python que permite que os usuários adicione, liste e marque tarefas como concluídas no terminal.
+Este é um simples gerenciador de tarefas em Python que permite que os usuários adicione, liste e marque tarefas como concluídas no terminal
 
 ## Funcionalidades
 
